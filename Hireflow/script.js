@@ -1,4 +1,9 @@
 const jobsContainer = document.getElementById("jobs");
+const filterDropdown = document.getElementById("filterType");
+const searchInput = document.getElementById("search");
+const sortDropdown = document.getElementById("sortType");
+
+let allJobs = [];
 
 async function fetchJobs() {
   try {
@@ -7,7 +12,8 @@ async function fetchJobs() {
     const response = await fetch("https://remotive.com/api/remote-jobs");
     const data = await response.json();
 
-    renderJobs(data.jobs);
+    allJobs = data.jobs;
+    renderJobs(allJobs);
 
   } catch (error) {
     jobsContainer.innerHTML = "<p>❌ Failed to load jobs</p>";
@@ -18,7 +24,20 @@ async function fetchJobs() {
 function renderJobs(jobs) {
   jobsContainer.innerHTML = "";
 
-  const limitedJobs = jobs.slice(0, 20);
+  const searchVal = searchInput.value.toLowerCase();
+
+  let filteredJobs = jobs
+    .filter(job => job.title.toLowerCase().includes(searchVal));
+
+  if (filterDropdown.value !== "all") {
+    filteredJobs = filteredJobs.filter(job => job.job_type === filterDropdown.value);
+  }
+
+  if (sortDropdown.value === "title") {
+    filteredJobs.sort((a, b) => a.title.localeCompare(b.title));
+  }
+
+  const limitedJobs = filteredJobs.slice(0, 20);
 
   limitedJobs.forEach((job) => {
     const card = document.createElement("div");
@@ -45,5 +64,9 @@ function renderJobs(jobs) {
     jobsContainer.appendChild(card);
   });
 }
+
+searchInput.addEventListener("input", () => renderJobs(allJobs));
+filterDropdown.addEventListener("change", () => renderJobs(allJobs));
+sortDropdown.addEventListener("change", () => renderJobs(allJobs));
 
 fetchJobs();

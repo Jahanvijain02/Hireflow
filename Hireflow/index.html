@@ -5,17 +5,32 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>HireFlow</title>
   <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
 
   <div class="container">
-    <h1>HireFlow</h1>
-    <p class="subtitle">Explore Remote Job Opportunities</p>
+    <h1>💼 HireFlow</h1>
+
+    <div class="controls">
+      <input type="text" id="search" placeholder="Search jobs...">
+
+      <select id="filterType">
+        <option value="all">All Jobs</option>
+        <option value="full_time">Full-Time</option>
+        <option value="part_time">Part-Time</option>
+        <option value="contract">Contract</option>
+      </select>
+
+      <select id="sortType">
+        <option value="none">Sort</option>
+        <option value="title">Sort by Title</option>
+      </select>
+    </div>
 
     <div id="jobs"></div>
   </div>
 
   <script src="script.js"></script>
+
 </body>
 </html>
