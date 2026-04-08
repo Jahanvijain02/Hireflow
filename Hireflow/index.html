@@ -10,6 +10,7 @@
 
   <div class="container">
     <h1>💼 HireFlow</h1>
+    <p class="subtitle">Find your dream remote job</p>
 
     <div class="controls">
       <input type="text" id="search" placeholder="Search jobs...">
@@ -19,12 +20,17 @@
         <option value="full_time">Full-Time</option>
         <option value="part_time">Part-Time</option>
         <option value="contract">Contract</option>
+        <option value="freelance">Freelance</option>
+
       </select>
 
       <select id="sortType">
         <option value="none">Sort</option>
         <option value="title">Sort by Title</option>
       </select>
+
+      <button id="darkToggle">🌙</button>
+      <a href="favorites.html"><button>⭐</button></a>
     </div>
 
     <div id="jobs"></div>
